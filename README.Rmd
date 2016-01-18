@@ -1,3 +1,3 @@
 #Read Me
 
-This is the project repository for Melanie Bruck's Pscyh 254 Replication. I am replicating Schaerer, Swaab, & Galinsky (2015).
+This is the project repository for Melanie Brucks's Pscyh 254 Replication. I am replicating Schaerer, Swaab, & Galinsky (2015).
