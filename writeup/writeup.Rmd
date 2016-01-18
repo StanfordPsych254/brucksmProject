@@ -1,0 +1,61 @@
+#Replication of Schaerer, Swaab, & Galinsky
+
+Melanie Brucks
+-------------
+
+Justification of Study Choice
+---------------------------------------
+
+We were asked to choose a paper (and one study from this paper) from the 2015 Psychological Science Issues to replicate. While none of the papers both directly relate to my interests (consumer creativity) while being easily replicable on MTurk, I am interested in how being powerless can actually, in some ways, empower you. The study I have chosen to replicate (Study 1a and 1b) of Schaerer, Swaab, & Galinsky (2015) investigates the effect of having no alternatives in negotiations. They find that having no negotiation alternative is better than having a weak negotiation alternative because the weak negotiation alternative anchors negotiators' first offers. I chose to replicate both 1a and 1b because the only difference is which vingette participants read (plus an extra condition in Study 1b).
+
+I hope to take this finding and potentially expand it to creativity-- can people be anchored on a certain amount of originality? And does this lead to power sometimes making people less creative? The first step is to explore this study and learn more about what is required to run this kind of paradigm before I start making modifications in my own research.
+
+Stimuli and Procedures
+---------------------------------------
+
+Participants read hypothetical scenarios in both Studies with different negotiaition situations and then they respond to self-report DVs. 
+
+Note: This wording is taken from the paper. The exact wording might need to be requested from authors.
+
+###Study 1a:
+
+"Imagine that you recently purchased a digital music player and therefore want to sell of your old CDs. The CD is in reasonably good condition, with no scratches and an intact case."
+
+###*Manipulations*
+
+a. **no-BATNA** (Best Alternative to a Negotiated Agreement): “Nobody else has offered you money for the CD. Thus, if you can’t reach an agreement in the current negotiation, you won’t get any money for the CD.” 
+
+b. **weak-BATNA**: “Another buyer has offered you $2 for the CD. Thus, if you can’t reach an agreement in the current negotiation, you will get $2 for the CD.” 
+
+c. **strong-BATNA**: “Another buyer has offered you $8 for the CD. Thus, if you can’t reach an agreement in the current negotiation, you will get $8 for the CD.” 
+
+###Study 1b:
+
+"Imagine that you were invited for a job interview, you aced the job interview, the firm extended you an offer, and the only remaining issue was the salary. A human-resources representative has asked you for an intial offer for your desired salary.
+
+A industry report indicates that for comparable positions, the salary range was from $30,000 to $80,000 and the mena was $60,000."
+
+###*Manipulations*
+
+a. **ambiguous-BATNA**: nothing else
+
+b. **no-BATNA**: "You do not have any alternative offers and you do not expect more to come"
+
+b. **weak-BATNA** “A recruiter from a comparable firm has made you an offer with an overall value of $40,000.” 
+
+c. **strong-BATNA** "A recruiter from a comparable firm has made you an offer with an overall value of $70,000."
+
+###DVs for Studys 1a and 1b:
+
+1. "Please make a first offer"
+
+2. 4 power measures: Please indicate the extent to which you feel: powerful (1 = powerless, 7 = powerful), in control (1 = no control, 7 = in control), strong (1 = weak, 7 = strong), and confident (1 = unconfident, 7 = confident).
+
+3. attention check (Note: will need to ask authors for the specifics)
+
+4. demographic information
+
+Challenges
+---------------------------------------
+
+I have never coded in javascript before, so just replicating the design in javascript will be a challenge. I'm not sure what to expect. In addition, it is possible that MTurkers learn about certain attention checks. Hopefully we have the same rate of failure for the attention check as the authors did. Also, just making sure the subjects are engaged is always a problem, especially in these scenario-based studies. Lastly, it will be a challenge that the main DV (first offer) is free response because people usually give out ridiculous answers. Fortunately, the authors provide criteria to check for that: first offers >3SD above the mean. I'll also drop any negative responses as well. 
