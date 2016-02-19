@@ -1,0 +1,254 @@
+<!-- ## Code -->
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Negotiation Survey</title>
+<script src="jquery-1.11.2.min.js"></script>
+<script src="mmturkey-0.6.js"></script>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+<link rel="stylesheet" href="style.css" />
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+</head>
+<body>
+
+  <!-- The instructions slide. -->
+  <div class="slide" id="instructions">
+    <br>
+    <img src="images/stanford.png" alt="Stanford University">
+    <p id='logo-text'>Stanford Department of Psychology</p>
+    <p class="block-text">In this experiment, you will read a scenario and answer questions about how you would respond. You will also answer some questions about your experince.
+    </p>
+    <button type="button" onclick="this.blur(); experiment.next()">Start</button>
+
+    <p class="block-text"><br> <b> Note: you won't be able to preview this HIT before accepting it because it's so short. </b></p>
+
+    <p class="block-text" id="legal">By answering the following questions, you are participating in a study being performed
+    by the Stanford Department of Psychology. If you have questions about this research, please contact us at  please contact us at
+    <a href="mailto://stanfordpysch254@gmail.com.">stanfordpysch254@gmail.com.</a>.
+    You must be  at least 18 years old to participate. Your participation in
+    this research is voluntary. You may decline to answer any or all of the
+    following questions. You may decline further participation, at any time,
+    without adverse consequences. Your anonymity is assured; the researchers
+    who have requested your participation will not receive any personal information
+    about you. Note however that we have recently been made aware that your public
+    Amazon.com profile can be accessed via your worker ID if you do not choose
+    to opt out. If you would like to opt out of this feature, you may follow instructions available
+    <a href="https://www.amazon.com/gp/help/customer/display.html?nodeId=16465241">here</a>.</p>
+  </div>
+
+<!-- Intro -->
+<div class="slide" id="intro">
+  <p>&nbsp; </p>
+  Imagine that you just bought an MP3 player and you want to sell some of your old CDs since you no longer need them.
+  One of the CDs you want to sell is the album, "Forty Licks" by The Rolling Stones.
+  <p>&nbsp; </p>
+  <div style="text-align: center;"><IMG SRC="http://thumbs2.ebaystatic.com/d/l225/m/mEM8pJnjBKU_egigwqsR2oA.jpg" ALT="image"></div>
+  <p>&nbsp; </p>
+  Even though the CD is used, it is in reasonably good condition (case intact, no scratches on disc).
+  <p>
+  </p>
+  <button type="button" onclick="this.blur(); experiment.next()">Next</button>
+</div>
+
+<!-- Scales -->
+<div class="slide" id="scales">
+<p>&nbsp; </p>
+  Using the scale below, indicate how the negotition situation made you feel...
+  <p>&nbsp; </p>
+    <table align = "center"><tr>
+    <td align="center">
+      <tr>
+        <td>Powerless&nbsp;&nbsp;</td>
+        <td> </td>
+        <td><input type="radio" name="power" value = "1">&nbsp;</td>
+        <td><input type="radio" name="power" value = "2">&nbsp;</td>
+        <td><input type="radio" name="power" value = "3">&nbsp;</td>
+        <td><input type="radio" name="power" value = "4">&nbsp;</td>
+        <td><input type="radio" name="power" value = "5">&nbsp;</td>
+        <td><input type="radio" name="power" value = "6">&nbsp;</td>
+        <td><input type="radio" name="power" value = "7">&nbsp;</td>
+        <td>&nbsp;&nbsp;&nbsp;</td>
+        <td>Powerful</td>
+      </tr>
+    </table>
+    <p>&nbsp; </p>
+    <table align = "center"><tr>
+    <td align="center">
+      <tr>
+        <td>No control&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+        <td> </td>
+        <td><input type="radio" name="power1" value = "1">&nbsp;</td>
+        <td><input type="radio" name="power1" value = "2">&nbsp;</td>
+        <td><input type="radio" name="power1" value = "3">&nbsp;</td>
+        <td><input type="radio" name="power1" value = "4">&nbsp;</td>
+        <td><input type="radio" name="power1" value = "5">&nbsp;</td>
+        <td><input type="radio" name="power1" value = "6">&nbsp;</td>
+        <td><input type="radio" name="power1" value = "7">&nbsp;</td>
+        <td>&nbsp;&nbsp;&nbsp;</td>
+        <td>In control</td>
+      </tr>
+    </table>
+    <p>&nbsp; </p>
+    <table align = "center"><tr>
+    <td align="center">
+      <tr>
+        <td>Weak&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+        <td> </td>
+        <td><input type="radio" name="power2" value = "1">&nbsp;</td>
+        <td><input type="radio" name="power2" value = "2">&nbsp;</td>
+        <td><input type="radio" name="power2" value = "3">&nbsp;</td>
+        <td><input type="radio" name="power2" value = "4">&nbsp;</td>
+        <td><input type="radio" name="power2" value = "5">&nbsp;</td>
+        <td><input type="radio" name="power2" value = "6">&nbsp;</td>
+        <td><input type="radio" name="power2" value = "7">&nbsp;</td>
+        <td>&nbsp;&nbsp;&nbsp;</td>
+        <td>Strong</td>
+      </tr>
+    </table>
+    <p>&nbsp; </p>
+    <table align = "center"><tr>
+    <td align="center">
+      <tr>
+        <td>Unconfident</td>
+        <td> </td>
+        <td><input type="radio" name="power3" value = "1">&nbsp;</td>
+        <td><input type="radio" name="power3" value = "2">&nbsp;</td>
+        <td><input type="radio" name="power3" value = "3">&nbsp;</td>
+        <td><input type="radio" name="power3" value = "4">&nbsp;</td>
+        <td><input type="radio" name="power3" value = "5">&nbsp;</td>
+        <td><input type="radio" name="power3" value = "6">&nbsp;</td>
+        <td><input type="radio" name="power3" value = "7">&nbsp;</td>
+        <td>&nbsp;&nbsp;&nbsp;</td>
+        <td>Confident</td>
+      </tr>
+    </table>
+    <p>&nbsp; </p>
+<table><tr>
+<td>
+<button type="button" id="nextButton" onClick="experiment.log_response()"> Next</button>
+       </td>
+    <tr><td align="center">
+    <div id="testMessage2"> </div>
+    </td></tr>
+
+</table>
+</div>
+
+
+
+<!-- Free form first offer -->
+<div class="slide" id="first_offer">
+  <tr><td align="center">
+    <p>&nbsp; </p>
+  <div id="condMessage"> </div>
+  </td></tr>
+  <p></p>
+
+  <form name="myForm"
+  onsubmit="experiment.submit_comments()" method="post">
+  My first offer is (in US$): <input type="number" step="0.01" name="fname">
+</table>
+
+
+  <table><tr>
+  <td>
+    <button type="button" id="nextbutton" onClick="experiment.submit_comments()"> Next</button>
+  </td>
+      <tr><td>
+      <div id="testMessage1"> </div>
+      </td></tr>
+
+ </table>
+ </div>
+
+ <!-- Attention check -->
+ <div class="slide" id="AC">
+   <p>&nbsp; </p>
+   <strong> Music Preferences </strong>
+   <p>&nbsp; </p>
+   Most modern theories of decision making recognize the fact that decisions do not take place in a vacuum.
+   Inidividual preferences and knowledge, along with situational variables, can greatly impact the decision
+   process. In order to facilitate our research on decision making, we are interesed in knowing certain factors
+   about you, the decision maker. Specifically, we are interested in whether you actually take the time to
+   read the directions; if not, then some of our manipulations that rely on chanvges in the instructions will
+   be ineffective. So, in order to demonstrate that you have read the instructions, please ignore the options
+   provided, and simply choose the three activities "Metallica," "Roxette," and "Bad Religion."
+   <p></p>
+   Thank you very much.
+   <p>&nbsp; </p>
+
+   <strong> While concerts do you regularly go to (check all that apply): </strong>
+    <p>&nbsp; </p>
+
+  <ul class="checkbox-grid">
+    <li><input type="checkbox" id = "text1" name="text1" value="value1" /><label for="text1">&nbsp;Rolling Stones</label></li>
+    <li><input type="checkbox" id = "text2" name="text2" value="value2" /><label for="text2">&nbsp;Ozzy Osbourne</label></li>
+    <li><input type="checkbox" id = "text3" name="text3" value="value3" /><label for="text3">&nbsp;AC/DC</label></li>
+    <li><input type="checkbox" id = "text4" name="text4" value="value4" /><label for="text4">&nbsp;Marilyn Manson</label></li>
+    <li><input type="checkbox" id = "text5" name="text5" value="value5" /><label for="text5">&nbsp;Metallica</label></li>
+    <li><input type="checkbox" id = "text6" name="text6" value="value6" /><label for="text6">&nbsp;Bad Religion</label></li>
+    <li><input type="checkbox" id = "text7" name="text7" value="value7" /><label for="text7">&nbsp;Guns N Roses</label></li>
+    <li><input type="checkbox" id = "text8" name="text8" value="value8" /><label for="text8">&nbsp;System of a Down</label></li>
+    <li><input type="checkbox" id = "text9" name="text9" value="value9" /><label for="text9">&nbsp;Led Zeppelin</label></li>
+    <li><input type="checkbox" id = "text10" name="text10" value="value10" /><label for="text10">&nbsp;Jack White</label></li>
+    <li><input type="checkbox" id = "text11" name="text11" value="value11" /><label for="text11">&nbsp;Pink Floyd</label></li>
+    <li><input type="checkbox" id = "text12" name="text12" value="value12" /><label for="text12">&nbsp;Papa Roach</label></li>
+    <li><input type="checkbox" id = "text13" name="text13" value="value13" /><label for="text13">&nbsp;Red Hot Chili Peppers</label></li>
+    <li><input type="checkbox" id = "text14" name="text14" value="value14" /><label for="text14">&nbsp;Roxette</label></li>
+
+</ul>
+   <button type="button" onclick="this.blur(); experiment.log_response2()">Next</button>
+ </div>
+
+
+ <!-- Demos -->
+ <div class="slide" id="demos">
+   <p>&nbsp; </p>
+   Finally, please answer these final questions about you:
+   <p>&nbsp; </p>
+   Your age: <input type="text" id ="age" step="0.01" name="fname1">
+   <p>&nbsp; </p>
+   Your gender
+   <div><input type="radio" name="sex" value = "m">&nbsp;Male</div>
+   <div><input type="radio" name="sex" value = "f">&nbsp;Female</div>
+   <p>&nbsp; </p>
+   What is your nationality?
+      <div><input type="radio" name="US" value = "us">&nbsp;US</div>
+      <div><input type="radio" name="US" value = "other">&nbsp;Other</div>
+   <p>&nbsp; </p>
+   What is your ethnicity?
+      <div><input type="radio" name="eth" value = "1">&nbsp;White, Non-Hispanic</div>
+      <div><input type="radio" name="eth" value = "2">&nbsp;Hispanic</div>
+      <div><input type="radio" name="eth" value = "3">&nbsp;African-American</div>
+      <div><input type="radio" name="eth" value = "4">&nbsp;Asian-Pacific (e.g., Japan, Korea, China, Thailand, etc.)</div>
+      <div><input type="radio" name="eth" value = "5">&nbsp;South Asian (e.g., India, Pakistan, Bangladesh, etc.)</div>
+       <div><input type="radio" name="eth" value = "6">&nbsp;Other</td></div>
+       <td>&nbsp;&nbsp;&nbsp;</td>
+       <td></td>
+     </tr>
+   </table>
+   <p></p>
+   What is your native language?
+   <div><input type="radio" name="lang" value = "1">&nbsp;English</div>
+   <div><input type="radio" name="lang" value = "0">&nbsp;Other</div>
+   <table align="left"><tr>
+   <td align="left">
+     <button type="button" id="nextbutton" onClick="experiment.submit_comments2()"> Next</button>
+   </td>
+       <tr><td align="left">
+       <div id="testMessage3"> </div>
+       </td></tr>
+
+  </table>
+  </div>
+
+<!-- The finish slide. -->
+<div class="slide" id="finished">
+ You're finished - thanks for participating! Submitting to Mechanical Turk...
+</div>
+
+<script src="Schaerer_mb_rep.js"></script>
+
+</body>
+</html>
