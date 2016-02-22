@@ -1,0 +1,37 @@
+`````{r}
+rm(list=ls())
+library(tidyr)
+library(dplyr)
+library(ggplot2)
+library(langcog) 
+library(rjson)
+``````
+
+````{r}
+path <- "~/Box Sync/mturk/"
+files <- dir(paste0(path,"sandbox-results/"), 
+             pattern = "*.json")
+d.raw <- data.frame()
+
+for (f in files) {
+  jf <- paste0(path, "sandbox-results/",f)
+  jd <- fromJSON(paste(readLines(jf), collapse=""))
+  id <- data.frame(workerid = jd$WorkerId,
+                   cond = jd$answer$data$cond,
+                   first_offer = jd$answer$data$first_offer,
+                   power=jd$answer$data$power,
+                   control =jd$answer$data$control,
+                   strong = jd$answer$data$strong,
+                   confident =jd$answer$data$confident,
+                   sex =jd$answer$data$sex,
+                   age = jd$answer$data$age,
+                   nat = jd$answer$data$nat,
+                   lang = jd$answer$data$langu,
+                   eth = jd$answer$data$eth,
+                   AC= jd$answer$data$AC)
+                   
+  
+     d.raw <- bind_rows(d.raw, id)
+}
+          
+               
