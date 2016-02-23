@@ -72,7 +72,7 @@ var experiment = {
 				'<p>&nbsp; </p>' +
 				'<em> You are negotiating the price for the CD. What is your first offer to the buyer? </em>' +
 				'<p>&nbsp; </p>' +
-				'</font>');
+				'</style>');
 			}
 			if (cond==2){
 				$("#condMessage").html('<font>' +
