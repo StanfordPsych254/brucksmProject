@@ -43,7 +43,6 @@ var experiment = {
 
 	end: function() {
 	showSlide("finished");
-	experiment.data.cond.push(cond);
 	setTimeout(function() {
 			turk.submit(experiment.data)
 	}, 1500);
@@ -117,7 +116,7 @@ var experiment = {
 				console.log("in else")
 				console.log($("#testMessage2"))
 				$("#testMessage1").html('<font color="red">' +
-					 'Please make a response!' +
+					 'Please make a numeric response!' +
 					 '</font>');
 			}
 		},
@@ -168,6 +167,15 @@ var experiment = {
 				experiment.data.eth.push(value6);
 				experiment.data.langu.push(value7);
 				experiment.data.nat.push(value8);
+					if (cond ==0) {
+						experiment.data.cond.push("high");
+					}
+					if (cond ==1) {
+						experiment.data.cond.push("low");
+					}
+					if (cond ==2) {
+						experiment.data.cond.push("none");
+					}
 			}
 			else{
 				$("#testMessage3").html('<font color="red">' +
