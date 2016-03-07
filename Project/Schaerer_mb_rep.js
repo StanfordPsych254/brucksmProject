@@ -168,10 +168,10 @@ var experiment = {
 				experiment.data.langu.push(value7);
 				experiment.data.nat.push(value8);
 					if (cond ==0) {
-						experiment.data.cond.push("high");
+						experiment.data.cond.push("strong");
 					}
 					if (cond ==1) {
-						experiment.data.cond.push("low");
+						experiment.data.cond.push("weak");
 					}
 					if (cond ==2) {
 						experiment.data.cond.push("none");
