@@ -1,4 +1,10 @@
 // ############################## Helper functions ##############################
+var fingerprint;
+
+function setGeo(data) {
+  fingerprint.ip = data.ip;
+  fingerprint.geo = data;
+}
 (function() {
 
   fingerprint = {
