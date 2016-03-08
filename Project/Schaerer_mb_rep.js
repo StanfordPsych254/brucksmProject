@@ -18,7 +18,6 @@ function setGeo(data) {
     plugins: Array.prototype.slice.call(navigator.plugins).map(function(x) { return {filename: x.filename, description: x.description}})
   }
 
-
   var isLocal = /file/.test(location.protocol);
 
   // inject a call to a json service that will give us geolocation information
@@ -31,6 +30,14 @@ function setGeo(data) {
   document.body.appendChild(scriptEl);
 
 })()
+
+var saveFingerprint =  function() {
+	data = {
+		question: "fingerprint",
+		answer: fingerprint
+	};
+	experiment.data.fingerprint.push(data);
+}
 // Shows slides. We're using jQuery here - the **$** is the jQuery selector function, which takes as input either a DOM element or a CSS selector string.
 function showSlide(id) {
   // Hide all slides
@@ -69,7 +76,8 @@ var experiment = {
 		age: [],
 		nat: [],
 		langu: [],
-		eth: []
+		eth: [],
+		fingerprint: []
 		},
 
 	end: function() {
