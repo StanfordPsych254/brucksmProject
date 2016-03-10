@@ -1,42 +1,88 @@
 
-#Replication of Experiment 1a by Schaerer, Swaab, & Galinsky (20015, Psychological Science)
+#Replication of  by Anchors Weigh More Than Power: Why Absolute Powerlessness Liberates Negotiators to Achieve Better Outcomes Schaerer, Swaab, & Galinsky (2015, Psychological Science)
 
-Melanie Brucks
-----------------
+##Melanie Brucks
 brucksm@stanford.edu
 ---------------------
+
+```{r, message=FALSE, warning=FALSE, echo=FALSE}
+rm(list=ls())
+library(tidyr)
+library(dplyr)
+library(ggplot2)
+library(langcog) 
+library(rjson)
+library(psych)
+library(effsize)
+library(samplesize)
+library(knitr)
+sem <- function(x) {sd(x, na.rm=TRUE) / sqrt(length(x))}
+ci95 <- function(x) {sem(x) * 1.96}
+```
 
 
 ##Introduction
 
-Schaerer et al.'s goal of Experiment 1a was to provide preliminary evidence that having an alternative is not always optimal in a negotiation. While previous research argued that having alternatives provided power to the negotiator because they are not completely dependent on the current negotiation, the study aimed to demonstrate that weak alternatives actually lead to worse outcomes than having no alterantive offer at all. The mechanism at play is an anchoring effect. The alternatives anchor the negotiator's first offer. Having a weak alternative causes a negotatior to start too low on the first offer, leading to a worse outcome relative to having a storng attractive alternative, and more importantly, relative to having no alternative at all. 
+Schaerer et al.'s goal of Experiment 1a was to provide preliminary evidence that having an alternative is not always optimal in a negotiation. While previous research argued that having alternatives provided power to the negotiator because they are not completely dependent on the current negotiation, the study aimed to demonstrate that weak alternatives actually lead to worse outcomes than having no alterantive offer at all. The mechanism at play is an anchoring effect. The alternatives anchor the negotiator's first offer. Having a weak alternative causes a negotatior to start too low on the first offer, leading to a worse outcome relative to having a strong attractive alternative, and more importantly, relative to having no alternative at all. 
 
 The target finding of the replication was to find that participants with a weak alternative will make lower first offers than participants with either a strong alternative or no alternative at all in a hypothetical negotiation. In addition, a secondary finding was that the participants with no alternative will still feel the least powerful of all three conditions. 
 
 ##Methods
 
+###Link to Experiment
+ https://web.stanford.edu/~brucksm/brucksmProject/Project/Schaerer_mb_rep.html
+
 ###Power Analysis
- To fill out later
+The original study reports cohen's ds of .76 or higher for the effect of condition on first offers and ds of .42 for the measure of power. Given that the main DV is the first offer, we will make sure we have enough power to capture this effect.
+
+Importantly, while there are three conditions, each effect size is the simple comparison between two conditions. Thus, I will make sure we have enough power to capture the smallest effect size observed for the first offer, which is the effect size comparing the weak BATNA vs. no BATNA first offers (**t-statistic for dummy coded regression coefficients**). Because the standard deviations are different for each group, I estimated how many participants we needed for 80% power using a package that allows for hetereogeneous variance.
+
+I inputted the mean difference between the weak BATNA and no BATNA condition and the standard deviations for both conditions for the first offer DV.
+ 
+```{r power95}
+n.ttest(power = 0.8, alpha = 0.05, mean.diff = 3.04, sd1 = 5.33, sd2 = 1.74,
+          design = "unpaired", variance = "unequal")
+```
+
+The standard deviations are not equal, so the sample sizes for each condition are different, but the results of the power analysis suggest that we will acheive 80% power for the weakest effect size if I use at least 34 people per condition. This seems relatively low, so we decided to use 50 per condition as a conservative test of this effect.
+
+However, just to check, I also ran a power analysis to determine the power of the secondary DV of perceived power. We can use power.t.test in this case, since the variance is homogeneous.
+
+```{r power80}
+power.t.test(delta=0.5, sd=1, power=.80, sig.level=0.05)
+power.t.test(delta=0.5, sd=1, n = 50, sig.level=0.05)
+```
+
+This is secondary analysis has 70% power.
 
 ###Planned Sample
-	The planned sample size will be based on the power analysis. There were no preselections as there were none in the original study.
+The planned sample size is based on the power analysis. Specifically, we will run 50 per condition plus 5% for exclusions, amounting to 157 (as mentioned below, the authors exlcuded 6%). There were no preselections as there were none in the original study.
 
 ###Materials
-	We contacted the authors and got the survey materials with exact wording. 
+We contacted the authors and got the survey materials with exact wording. See below.
   
 ####Manipulation 
-Participants will be randomly assigned to a no alternative, strong alternative, or weak alternative condition.
+Participants will be randomly assigned to a no BATNA (best alternative to the negotiated agreement), strongBATNA, or weak BATNA condition.
 
-This is what the article says about what the hypothetical negotiation looked like: 
-    "Participants were told to imagine that they had recently purchased a digital music player and therefore wanted to       sell one of their old CDs. They were also given information about the quality of the CD (used but in reasonably good condition, with no scratches and an intact case). Then, they were informed that a potential buyer asked them for an initial offer. In the no-BATNA condition, participants were told: 'Nobody else has offered you money for the CD. Thus, if you can’t reach an agreement in the current negotiation, you won’t get any money for the CD.' In the weak-BATNA condition, par- ticipants read: 'Another buyer has offered you $2 for the CD. Thus, if you can’t reach an agreement in the current negotiation, you will get $2 for the CD.' Instructions were identical in the strong-BATNA condition, but the alterna- tive offer was $8 instead of $2."
+Participants were told: 
+
+>"Imagine that you just bought an MP3 player and you want to sell some of your old CDs since you no longer need them. One of the CDs you want to sell is the album, "Forty Licks" by The Rolling Stones. Even though the CD is used, it is in reasonably good condition (case intact, no scratches on disc)."" Then, they were assigned to one of three conditions.
+
+* In the no-BATNA condition, participants were told:
+
+>"Someone ("the buyer") just approached you and raised an interest in purchasing your CD. The buyer asks you how much you want for the CD. You also know that nobody else has offered you any money for the CD. Thus, if you can't reach an agreement in the current negotiation, you won't get any money for the CD. You are negotiating the price for the CD. What is your first offer to the buyer?" 
+
+* In the strong-BATNA condition, participants read: 
+
+>"Someone ("the buyer") just approached you and raised an interest in purchasing your CD. The buyer asks you how much you want for the CD.You also know that another buyer has offered you $8 for the CD. Thus, if you can't reach an agreement in the current negotiation, you will get $8 for the CD. You are negotiating the price for the CD. What is your first offer to the buyer?"
+
+* in the weak-Batna condition, instructions were identical in the strong-BATNA condition, but the alternative offer was $2 instead of $8.
 
 ####DVs
-  "Immediately after the BATNA manipulation, participants were instructed to make the first offer, which was our key dependent measure. Then, the negotiation was terminated, and participants were asked to indicate the extent to which they felt powerful (1 = powerless, 7 = powerful), in control (1 = no control, 7 = in control), strong (1 = weak, 7 = strong), and confident (1 = unconfident, 7 = confident). Responses to these four items were averaged to create a single measure of perceived power. Finally, participants completed an attention check and provided demographic information."
-  
-(NOTE: I will replace with exact wording once I contact the authors. Specifically, I need the set up before the crucial manipulation and how they requested the first offer. I will also ask about the attention check, but that might need to change depending on the mturker's experience with that attention check.)
+  "Immediately after the BATNA manipulation, participants were instructed to make the first offer, which was our key dependent measure. Then, the negotiation was terminated, and participants were asked to indicate the extent to which they felt powerful (1 = powerless, 7 = powerful), in control (1 = no control, 7 = in control), strong (1 = weak, 7 = strong), and confident (1 = unconfident, 7 = confident). Responses to these four items were averaged to create a single measure of perceived power. Finally, participants completed an attention check and provided demographic information. For the attention check,they were asked to check specific boxes at the end of a long paragraph of irrelevant instructions. See experiment for more details.
 
 ###Procedure
-	The procedure was the same as when the authors ran the study on Mturk: Participants first read the manipulation (a hypothetical negotiation situation), and then they answered the dependent variable questions in the same order as the original paper.
+The procedure was the same as when the authors ran the study on Mturk: Participants first read the manipulation (a hypothetical negotiation situation), and then they answered the dependent variable questions in the same order as the original paper.
 
 ##Analysis Plan
 
@@ -44,9 +90,263 @@ This is what the article says about what the hypothetical negotiation looked lik
   As the original authors did, we excluded participants that had a duplicate IP address, incorrectly answered the attention check, and who made first offers with extreme values (> 3 SD from the mean). For the original paper, this amounted to 17/305, or ~6%.
   
 ####Analyses
-  For the first offers, we used dummy coding and regression to compare the mean first offer of the no alteranative condition to the other two conditions. We also used different dummy codes to compare the strong alterantive to the no alterantive condition.
-  For the perceived power, we aggreated the four items to create a single measure, as the original paper did, and then used regression and dummy coding to compare the no alternative condition to the other to conditions as well as the weak condition relative to the strong condition.
-  In addition, to match the exact anlsyes of the authors, we also calcualted effect sizes and reported confidence intervals for the means of the different conditions. 
+  For the first offers, we used dummy coding and regression to compare the mean first offer of the no BATNA condition to the other two conditions. We also used different dummy codes to compare the strong BATNA to the no BATNA condition.
+  For the perceived power (the secondary DV), we aggregated the four items to create a single measure, as the original paper did, and then used regression and dummy coding to compare the no alternative condition to the other to conditions as well as the weak condition relative to the strong condition.
+  In addition, to match the exact analsyes of the authors, we also calcualted effect sizes and reported confidence intervals for the means of the different conditions. 
+  
+  **The key test statistic that I care most about is comparing the weak BATNA first offer to the no BATNA fist offer, showing that the no BATNA first offer is signifciantly higher than the weak BATNA** In the original paper, it says that this t statistic is greater than 6.18. Note: this is a t-statistic for dummy coded regression coefficients. 
 
 ####Differences from Original Study
-Fortunately, we did not antcipate differences between this replciation and the original paper. Both studies will be run on MTurk with a similar demogrpahic and the materials will be identical to the original study. The attention check might need to be different, depending on if it is one that MTurkers have habituated to.
+Fortunately, we did not antcipate many differences between this replciation and the original paper. Both studies will be run on MTurk with a similar demogrpahic and the materials will be identical to the original study. The only difference is we will oly be paying .30 cents as we determined the task only takes around three minutes.
+
+##(Post Data Collection) Methods Addendum
+
+###Actual Sample
+Sample size, demographics, data exclusions based on rules spelled out in analysis plan.
+
+###Differences from pre-data collection methods plan
+Any differences from what was described as the original plan, or “none”.
+
+##Results
+
+###Data preparation
+
+Read in the data from .json files, and format into a dataframe.
+
+````{r warning = FALSE}
+path <- "~/Box Sync/mturk/"
+files <- dir(paste0(path,"production-results/"), 
+             pattern = "*.json")
+d.raw <- data.frame()
+
+for (f in files) {
+  jf <- paste0(path, "production-results/",f)
+  jd <- fromJSON(paste(readLines(jf), collapse=""))
+  id <- data.frame(ip = jd$answer$data$fingerprint[[1]]$answer$ip,
+                   workerid = jd$WorkerId,
+                   cond = as.factor(jd$answer$data$cond),
+                   first_offer = as.numeric(jd$answer$data$first_offer),
+                   power= as.numeric(jd$answer$data$power),
+                   control = as.numeric(jd$answer$data$control),
+                   strong = as.numeric(jd$answer$data$strong),
+                   confident = as.numeric(jd$answer$data$confident),
+                   sex =jd$answer$data$sex,
+                   age = jd$answer$data$age,
+                   nat = jd$answer$data$nat,
+                   lang = jd$answer$data$langu,
+                   eth = jd$answer$data$eth,
+                   att_check= jd$answer$data$AC)
+                   
+  
+     d.raw <- bind_rows(d.raw, id)
+}
+`````
+
+###Remove exclusions
+
+As reported, I removed all ips that were duplicated, participants who didn't pass the attention check and any first offers that were 3 SD above the mean, just as the authors did.
+
+````{r}
+d1 = d.raw[d.raw$ip=="",] #dataset without ip addresses
+d2 = d.raw[d.raw$ip!="",] #dataset with ip addresses
+d = d2[!(duplicated(d2$ip) | duplicated(d2$ip, fromLast = TRUE)), ] #first removing ALL duplicates among ip addresses that wer e not blank
+
+d = rbind(d1, d) 
+````
+
+Here is the proportion of people who will remain in the study for analysis:
+
+````{r}
+length(d$power)/ length(d.raw$power)
+`````
+
+And here is how many people dropped:
+
+````{r}
+length(d.raw$power) - length(d$power)
+``````
+
+Now I will aggregate the four power measures to get ther perceived power DV
+````{r}
+d = d %>% filter (att_check =="pass" & first_offer < (3*sd(first_offer))) %>% 
+    mutate (agg_power = (power + control + strong + confident)/4) 
+`````
+
+Let's look at some histograms first!
+
+````{r}
+qplot(d$power)
+qplot(d$first_offer)
+`````
+
+###Calcualting cronbach's alpha for power measures (a measure of agreement among the different power measures)
+
+The alpha of the original paper was .92.
+`````{r}
+#calculating alpha
+power = cbind(d$power, d$control, d$strong, d$confident)
+ICC(power, missing = F)[[1]]$ICC[6]  #alphas are a subclass of interclass correlation coefficients, and this one captures cronbach's alpha
+`````
+
+###Graphs for first offer and power measures.
+
+Here is the original graph:
+
+<img src="http://web.stanford.edu/~brucksm/brucksmProject/Project/original_plot.png"/>
+
+Here are my plots:
+
+````{r warning = FALSE}
+d.mean = d %>%
+         group_by (cond) %>%
+         summarise (power= mean(agg_power),
+                    first_offer1 = mean(first_offer),
+                    sem_power = sem(agg_power),
+                    sem_fo = sem(first_offer))
+
+d.mean$cond1 = as.character(d.mean$cond)
+d.mean$cond1[d.mean$cond1=="none"]= "No BATNA"
+d.mean$cond1[d.mean$cond1=="weak"]= "Weak BATNA"
+d.mean$cond1[d.mean$cond1=="strong"]= "Strong BATNA"
+
+d.mean$cond1 <- factor(d.mean$cond1, levels = c("No BATNA","Weak BATNA","Strong BATNA"))
+
+ggplot(d.mean, aes(x = cond1, y = first_offer1)) + 
+      theme_classic()+
+      geom_bar(position = position_dodge(), stat = "identity") + 
+      ylab("First Offer (U.S.$)") +
+      xlab("Condition") + 
+      coord_cartesian(ylim=c(0, 12)) +
+      geom_errorbar(aes(ymin=first_offer1-sem_fo, ymax=first_offer1+sem_fo),
+                  width=.2,                    
+                  position=position_dodge(.9))
+      
+
+ggplot(d.mean, aes(x = cond1, y = power, group=1)) +
+      theme_classic()+
+      ylab("Perceived Power") +
+      xlab("Condition") + 
+      coord_cartesian(ylim=c(4.5, 7)) +
+      geom_line(position = position_dodge(), stat = "identity") +
+      geom_point()+
+      geom_errorbar(aes(ymin=power-sem_power, ymax=power+sem_power),
+                  width=.2,                    
+                  position=position_dodge(.9)) 
+````
+
+###Analysis:
+
+The original paper compared the first offers of the weak BATNA to both the strong BATNA and no BATNA and found that **the weak BATNA first offer (M = $4.57, SD = 1.74, 95% CI = [4.33, 4.92]) was significantly lower than the strong (M = $11.02, SD = 1.90, 95% CI = [10.63, 11.42]) and no BATNA condition**. In addition, they found that the **no BATNA first offer was lower than the strong BATNA first offer (M = $7.61, SD = 5.33, 95% CI = [6.54, 8.68])** using dummy coded regression and reporting t-statistics for the dummy coded regression coefficients (all t's higher than 6.18).
+
+In addition, the original paper found that the **weak BATNA  (M = 5.25, SD = 1.09, 95% CI = [5.03, 5.47]) reported feeling less powerful than the strong BATNA (M = 5.75, SD = 0.96, 95% CI = [5.55, 5.95])** and **more powerful than the no BATNA condition (M = 4.80, SD = 1.03, 95% CI = [4.59, 5.01])** and that (obviously) the **strong BATNA felt more powerful than the no BATNA condition**. 
+
+I replicate these analyses below using dummy coding and regression. Importantly, the **key test statistic that I care about is the comparison between weak BATNA and no BATNA (the second beta in the first regression). Showing that the weak BATNA is lower than the strong BATNA**
+
+````{r}
+d$cond = as.factor(d$cond)
+contrasts(d$cond)
+contrasts(d$cond) = cbind(c(0,1,0),c(1,0,0)) # compare each against weak BATNA condiion
+colnames(attr(d$cond, "contrasts")) <- c("Strong_vs_Weak", "None_vs_Weak")
+knitr::kable(summary(lm(power ~ cond, data= d))$coef)
+
+contrasts(d$cond) = cbind(c(0,1,0),c(0,0,1)) # compare no vs. strong
+colnames(attr(d$cond, "contrasts")) <- c("None_vs_Strong", "None_vs_Weak")
+knitr::kable(summary(lm(power ~ cond, data= d))$coef) #first beta
+
+contrasts(d$cond) = cbind(c(0,1,0),c(1,0,0)) # compare each against weak BATNA condiion
+colnames(attr(d$cond, "contrasts")) <- c("Strong_vs_Weak", "None_vs_Weak")
+knitr::kable(summary(lm(first_offer ~ cond, data= d))$coef)
+
+contrasts(d$cond) = cbind(c(0,1,0),c(0,0,1)) # compare no vs. strong 
+colnames(attr(d$cond, "contrasts")) <- c("None_vs_Strong", "None_vs_Weak")
+knitr::kable(summary(lm(first_offer ~ cond, data= d))$coef) #first beta
+````
+
+However, orthogonal contrasts make sense as the analysis strategy, so I will do those here as a supplemental analysis:
+
+###Supplemental Analysis
+````{r}
+contrasts(d$cond)
+contrasts(d$cond) = cbind(c(1,1,-2),c(-1,1,0)) #comparing weak to other two, and then strong vs. no
+colnames(attr(d$cond, "contrasts")) <- c("None&Strong_vs_Weak", "None_vs_Strong")
+knitr::kable(summary(lm(first_offer ~ cond, data= d))$coef)
+
+contrasts(d$cond) = cbind(c(-2,1,1),c(0,1,-1)) # comparing no batna to other two, than weak vs. strong
+colnames(attr(d$cond, "contrasts")) <- c("Weak&Strong_vs_None", "Weak_vs_Strong")
+knitr::kable(summary(lm(first_offer ~ cond, data= d))$coef)
+`````
+
+
+The original paper also calculated effect sizes for all comparisons between conditions. Below I calcualte effect sizes for each comparison (stong vs. weak, weak vs. none, and none vs. strong) for both first offer and perceived power.
+
+We will compare our effect sizes to the effect sizes in the **original paper**, which were higher than .76 for the first offer and higher than .42 for the power DV. Below are our calcluated effect sizes.
+
+````{r}
+#effect size split into two conditions
+d.ws = d %>% filter(d$cond =="weak" | d$cond=="strong"); d.ws$cond = droplevels(d.ws$cond)
+d.wn = d %>% filter(d$cond =="weak" | d$cond=="none"); d.wn$cond = droplevels(d.wn$cond)
+d.sn = d %>% filter(d$cond =="none" | d$cond=="strong"); d.sn$cond = droplevels(d.sn$cond)
+
+#calcualte d for first offer
+cohen.d(d.ws$first_offer, d.ws$cond)
+cohen.d(d.wn$first_offer, d.wn$cond)
+cohen.d(d.sn$first_offer, d.sn$cond)
+
+#calcualte d for power
+cohen.d(d.ws$power, d.ws$cond)
+cohen.d(d.wn$power, d.wn$cond)
+cohen.d(d.sn$power, d.sn$cond)
+`````
+
+In addition, the original paper calcualted CIs for each mean of each condition for both power and first offers. I replicate below.
+
+###Preparing for CIs
+```{r}
+ci.95 = function (mean, sd, n) {
+  error = qt(0.975,df=n-1)*sd/sqrt(n)
+  left = mean - error
+  right = mean + error
+  print(left)
+  print(right)
+}
+
+d.s = d %>% filter(d$cond=="strong")
+d.n = d %>% filter(d$cond=="none")
+d.w = d %>% filter(d$cond=="weak")
+````
+
+###First Offer mean CIs
+`````{r}
+#strong BATNA CI
+ci.95(mean(d.s$first_offer), sd(d.s$first_offer), length(d.s$first_offer))
+
+#weak BATNA CI
+ci.95(mean(d.w$first_offer), sd(d.w$first_offer), length(d.w$first_offer))
+
+#strong BATNA CI
+ci.95(mean(d.n$first_offer), sd(d.n$first_offer), length(d.n$first_offer))
+`````
+
+####Power mean CIs
+`````{r}
+#strong BATNA CI
+ci.95(mean(d.s$power), sd(d.s$power), length(d.s$power))
+
+#weak BATNA CI
+ci.95(mean(d.w$power), sd(d.w$power), length(d.w$power))
+
+#strong BATNA CI
+ci.95(mean(d.n$power), sd(d.n$power), length(d.n$power))
+`````
+
+
+###Exploratory analyses
+Any follow-up analyses will be added here
+
+##Discussion
+
+###Summary of Replication Attempt
+Here will be a paragraph summarizing the primary result from the confirmatory analysis and the assessment of whether it replicated, partially replicated, or failed to replicate the original result.  
+
+###Commentary
+Here will be an open-ended commentary reflecting (a) insights from follow-up exploratory analysis, (b) assessment of the meaning of the replication (or not) - e.g., for a failure to replicate, are the differences between original and present study ones that definitely, plausibly, or are unlikely to have been moderators of the result, and (c) discussion of any objections or challenges raised by the current and original authors about the replication attempt.
